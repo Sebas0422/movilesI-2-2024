@@ -30,6 +30,7 @@ class BottomFragment : Fragment(), NotaAdapter.OnNotaClickListener {
     )
 
     private lateinit var rvNotas: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,8 +64,8 @@ class BottomFragment : Fragment(), NotaAdapter.OnNotaClickListener {
         adapter.itemUpdated(nota)
     }
 
-    public fun addNotaToList(title: String, content: String) {
-        val lastId = notas.last().id + 1
+    public fun  addNotaToList(title: String, content: String) {
+        val lastId = (notas.last().id + 1)
         val nota = Nota(lastId, title, content)
         val adapter = rvNotas.adapter as NotaAdapter
         adapter.itemAdded(nota)
