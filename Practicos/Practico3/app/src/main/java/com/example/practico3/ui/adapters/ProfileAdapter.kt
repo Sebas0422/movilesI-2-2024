@@ -71,9 +71,9 @@ class ProfileAdapter(
                 val line = View(linearLayout.context).apply {
                     layoutParams = LinearLayout.LayoutParams(0, 10).apply {
                         weight = 4f
-                        rightMargin = 20 // Espacio entre las líneas
+                        rightMargin = 20
                     }
-                    setBackgroundColor(Color.BLACK) // Color inicial
+                    setBackgroundColor(Color.BLACK)
                 }
                 linearLayout.addView(line)
             }
@@ -95,7 +95,7 @@ class ProfileAdapter(
             val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
             for (i in 0 until line.childCount) {
                 val line = line.getChildAt(i)
-                line.setBackgroundColor(if (i == firstVisiblePosition) Color.BLUE else Color.GRAY) // Cambia el color según sea necesario
+                line.setBackgroundColor(if (i == firstVisiblePosition) Color.BLUE else Color.GRAY)
             }
         }
 

@@ -15,5 +15,4 @@ class SharedViewModel : ViewModel() {
         _users.value = currentList
     }
     fun getLikedUsers(): LiveData<ArrayList<User>> = _users
-
 }

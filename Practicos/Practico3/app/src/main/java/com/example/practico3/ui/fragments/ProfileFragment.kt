@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practico3.R
@@ -56,7 +54,6 @@ class ProfileFragment : Fragment(), ProfileAdapter.OnProfileClickListener  {
     }
 
     override fun onLikeClick(user: User) {
-        // Añadir el usuario al SharedViewModel
         sharedViewModel.addLikedUser(user)
         val adapter = binding.rvProfile.adapter as ProfileAdapter
         adapter.itemDelete(user)

@@ -13,6 +13,7 @@ import com.example.practico3.ui.adapters.ProfileAdapter
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

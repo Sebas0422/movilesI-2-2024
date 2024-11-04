@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/personListFragment">
+
+    <fragment
+        android:id="@+id/personListFragment"
+        android:name="com.example.practico4.ui.fragments.PersonListFragment"
+        android:label="fragment_person_list"
+        tools:layout="@layout/fragment_person_list" >
+        <action
+            android:id="@+id/action_personListFragment_to_newPersonFragment"
+            app:destination="@id/newPersonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPersonFragment"
+        android:name="com.example.practico4.ui.fragments.PersonFragment"
+        android:label="fragment_new_person"
+        tools:layout="@layout/fragment_person" />
+</navigation>

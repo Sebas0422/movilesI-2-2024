@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practico3.R
 import com.example.practico3.databinding.FragmentProfileLikeBinding
@@ -33,10 +34,17 @@ class ProfileLikeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileLikeBinding.inflate(inflater, container, false)
-        // Observar cambios en la lista de usuarios "likados"
+        setupEventListeners()
         setupRecyclerView()
         setupViewModelObservers()
         return binding.root
+    }
+
+    private fun setupEventListeners(){
+        /*binding.btnVolver.setOnClickListener {
+            val navController = findNavController()
+            navController.navigate(R.id.action_profileLikeFragment_to_profileFragment)
+        }*/
     }
 
     private fun setupRecyclerView(){
