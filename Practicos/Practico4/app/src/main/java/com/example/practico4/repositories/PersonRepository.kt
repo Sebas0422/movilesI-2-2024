@@ -9,7 +9,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object PersonRepository {
-
     private val retrofit = RetrofitRepository.getRetrofitInstance()
     private val service = retrofit.create(PersonService::class.java)
     
@@ -17,8 +16,6 @@ object PersonRepository {
         onSuccess: (Persons) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        val retrofit = RetrofitRepository.getRetrofitInstance()
-        val service = retrofit.create(PersonService::class.java)
         service.getPersonList().enqueue(object : Callback<Persons> {
             override fun onResponse(call: Call<Persons>, response: Response<Persons>) {
                 if (response.isSuccessful) {

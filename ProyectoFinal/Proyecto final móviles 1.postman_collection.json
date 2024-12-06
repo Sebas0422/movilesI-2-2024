@@ -1,0 +1,813 @@
+{
+	"info": {
+		"_postman_id": "244bc1d8-68b1-46bf-8f27-043701a2857e",
+		"name": "Proyecto final móviles 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6777473"
+	},
+	"item": [
+		{
+			"name": "autenticación",
+			"item": [
+				{
+					"name": "iniciar sesión",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"if (jsonData.access_token) {\r",
+									"    pm.collectionVariables.set(\"token\", jsonData.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testdriver2@test.com\",\r\n    \"password\": \"test!123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/users/login",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juan Driver\",\r\n    \"email\": \"testdriver2@test.com\",\r\n    \"password\": \"test!123\",\r\n    \"role\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/users",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener datos del usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_URL}}/me",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "restaurantes",
+			"item": [
+				{
+					"name": "crear restaurante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pollo Campeón\",\r\n    \"address\": \"Av banzer 123\",\r\n    \"latitude\": \"-17.75915768559145\",\r\n    \"longitude\": \"-63.17648315518687\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/restaurants",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar restaurante",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pollo Campeón Central\",\r\n    \"address\": \"Av banzer 123\",\r\n    \"latitude\": \"-17.75915768559145\",\r\n    \"longitude\": \"-63.17648315518687\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/restaurants/1",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subir logo de restaurante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Imágenes/1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/restaurants/1/logo",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"restaurants",
+								"1",
+								"logo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener lista de restaurantes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_URL}}/restaurants",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener 1 restaurante",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_URL}}/restaurants/1",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "productos",
+			"item": [
+				{
+					"name": "crear producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1/4 Pollo Pierna\",\r\n    \"description\": \"Pollo, arroz, papa, plátano\",\r\n    \"price\": \"32\",\r\n    \"restaurant_id\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/products",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar producto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"1/4 Pollo Pierna\",\r\n    \"description\": \"Pollo, arroz, papa, plátano\",\r\n    \"price\": \"33\",\r\n    \"restaurant_id\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/products/1",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subir imagen del producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Imágenes/5823831_700b.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/products/2/picture",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"products",
+								"2",
+								"picture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener lista de productos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_URL}}/products",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener 1 producto",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_URL}}/products/1",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar producto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SERVER_URL}}/products/1",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "pedidos",
+			"item": [
+				{
+					"name": "crear pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurant_id\": 1,\r\n    \"total\": 100,\r\n    \"address\": \"Av banzer 100\",\r\n    \"latitude\": \"-17.769170204594246\",\r\n    \"longitude\": \"-63.18297131152056\",\r\n    \"details\": [\r\n        {\"product_id\": 2,\r\n        \"qty\": 1,\r\n        \"price\": \"31\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/orders",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener pedidos del usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/orders",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener pedidos del usuario Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/orders/free",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders",
+								"free"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener detalle de un pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/orders/10",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aceptar pedido chofer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/orders/12/accept",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders",
+								"12",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "chofer dice pedido en camino",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/orders/12/omw",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders",
+								"12",
+								"omw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pedido entregado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/orders/12/delivered",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders",
+								"12",
+								"delivered"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enviar prueba de entrega",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Imágenes/1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/orders/10/deliverproof",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"orders",
+								"10",
+								"deliverproof"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "chofer",
+			"item": [
+				{
+					"name": "chofer manda ubicacion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"latitude\": \"-17.763229578999862\",\r\n    \"longitude\": \"-63.17880453336264\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/drivers/location",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"drivers",
+								"location"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER_URL",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}

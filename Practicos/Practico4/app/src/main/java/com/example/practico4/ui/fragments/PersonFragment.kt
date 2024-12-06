@@ -20,12 +20,15 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.practico4.databinding.FragmentPersonBinding
+import com.example.practico4.models.Email
 import com.example.practico4.models.Phone
+import com.example.practico4.ui.adapters.PersonEmailItemAdapter
 import com.example.practico4.ui.adapters.PersonPhoneItemAdapter
 import com.example.practico4.ui.viewmodels.PhoneViewModel
 import com.example.practico4.ui.viewmodels.SharedViewModel
 
-class PersonFragment : Fragment(), PersonPhoneItemAdapter.PersonPhoneItemListener {
+class PersonFragment : Fragment(),
+    PersonPhoneItemAdapter.PersonPhoneItemListener{
     private lateinit var binding: FragmentPersonBinding
     private val phoneViewModel: PhoneViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -49,7 +52,7 @@ class PersonFragment : Fragment(), PersonPhoneItemAdapter.PersonPhoneItemListene
     private fun setupViewModelObservers() {
         sharedViewModel.getPersona().observe(viewLifecycleOwner) { person ->
             val fullName =  person.name + " " + person.last_name
-            
+            binding.txtPersonName.setText(fullName)
             if (person.profile_picture.isNotEmpty()) {
                 Glide.with(this)
                     .load(person.profile_picture)
@@ -58,6 +61,7 @@ class PersonFragment : Fragment(), PersonPhoneItemAdapter.PersonPhoneItemListene
                 binding.imgPerson.setImageResource(android.R.drawable.ic_menu_gallery)
             }
             binding.rvPhones.adapter = PersonPhoneItemAdapter(person.phones, this)
+            //binding.rvEmails.adapter = PersonEmailItemAdapter(person.emails, this)
         }
 
         phoneViewModel.createdPhone.observe(viewLifecycleOwner){phone->
@@ -76,6 +80,11 @@ class PersonFragment : Fragment(), PersonPhoneItemAdapter.PersonPhoneItemListene
             adapter = PersonPhoneItemAdapter(arrayListOf(), this@PersonFragment)
             layoutManager = LinearLayoutManager(context)
         }
+
+        /*binding.rvEmails.apply {
+            adapter = PersonEmailItemAdapter(arrayListOf(), this@PersonFragment)
+            layoutManager = LinearLayoutManager(context)
+        }*/
     }
 
     private fun setupEventListeners() {
@@ -167,7 +176,6 @@ class PersonFragment : Fragment(), PersonPhoneItemAdapter.PersonPhoneItemListene
         builder.show()
     }
 
-
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
@@ -175,4 +183,5 @@ class PersonFragment : Fragment(), PersonPhoneItemAdapter.PersonPhoneItemListene
                 arguments = Bundle().apply {}
             }
     }
+
 }

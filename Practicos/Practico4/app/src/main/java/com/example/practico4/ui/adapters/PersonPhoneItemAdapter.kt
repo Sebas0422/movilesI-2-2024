@@ -70,7 +70,7 @@ class PersonPhoneItemAdapter(
             }else{
                 txtPhone.setHint("Ingrese el numero de telefono")
             }
-            val options = mutableListOf( "Casa", "Trabajo", "Universidad","Otro")
+            val options = mutableListOf( "Casa", "Trabajo", "Celular","Otro")
             addSpinnerOptions(phone.label, options)
             listener.onPhoneOptionsListener(phone,options, optionsLabelPhone)
             btnDeletePhone.setOnClickListener{listener.onPhoneDelete(phone)}
